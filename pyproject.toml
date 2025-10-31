@@ -86,4 +86,6 @@ dev = [
     "cmake>=3.15",
     "jupyter>=1.0",
     "matplotlib>=3.5",
+    "tifffile>=2023.0.0",
+    "pandas>=2.0.0",
 ]
