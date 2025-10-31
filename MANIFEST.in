@@ -1,0 +1,29 @@
+# Include important documentation
+include README.md
+include LICENSE.txt
+include CLAUDE.md
+include BUILDING.md
+
+# Include build configuration
+include pyproject.toml
+include CMakeLists.txt
+
+# Include Cython source
+recursive-include src *.pyx *.pxd
+
+# Include KLB C++ library source
+recursive-include external/klb/src *.cpp *.h *.c
+recursive-include external/klb/cmake *
+include external/klb/CMakeLists.txt
+
+# Include tests
+recursive-include test *.py
+
+# Exclude git and build artifacts
+global-exclude *.pyc
+global-exclude *.pyo
+global-exclude __pycache__
+global-exclude .git*
+global-exclude *.so
+global-exclude *.dll
+global-exclude *.dylib

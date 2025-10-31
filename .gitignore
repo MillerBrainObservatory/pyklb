@@ -1,0 +1,410 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.pyd
+*.dll
+*.dylib
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+pip-log.txt
+pip-delete-this-directory.txt
+
+# PyInstaller
+*.manifest
+*.spec
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.log
+.pytest_cache/
+.hypothesis/
+pytestdebug.log
+
+# Translations
+*.mo
+*.pot
+
+# Django / Flask
+*.log
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+instance/
+.webassets-cache
+
+# Scrapy
+.scrapy
+
+# Sphinx documentation
+docs/_build/
+docs/_autosummary/
+
+# PyBuilder
+.pybuilder/
+target/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+*/.ipynb_checkpoints/*
+*.ipynb_checkpoints
+
+# IPython
+profile_default/
+ipython_config.py
+
+# pyenv
+.python-version
+
+# pipenv
+Pipfile.lock
+
+# poetry
+poetry.lock
+
+# PEP 582
+__pypackages__/
+
+# Celery
+celerybeat-schedule
+celerybeat.pid
+
+# SageMath
+*.sage.py
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+.venv/
+
+# UV
+.uv/
+uv.lock
+
+# Spyder
+.spyderproject
+.spyproject
+
+# Rope
+.ropeproject
+
+# mkdocs
+/site
+
+# mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Pyre
+.pyre/
+
+# pytype
+.pytype/
+
+# Cython (Cython-generated C/C++ files, not source files)
+# Keep external/ C/C++ source files but ignore Cython-generated ones
+*.c
+*.cpp
+!external/**/*.c
+!external/**/*.cpp
+*.html
+src/pyklb.c
+src/pyklb.cpp
+
+# Build artifacts
+*.o
+*.obj
+*.lib
+*.exp
+*.pdb
+*.ilk
+*.suo
+*.sdf
+*.opensdf
+*.opendb
+*.VC.db
+*.VC.VC.opendb
+
+# CMake
+CMakeCache.txt
+CMakeFiles/
+CMakeScripts/
+Testing/
+Makefile
+cmake_install.cmake
+install_manifest.txt
+compile_commands.json
+CTestTestfile.cmake
+_deps
+*.cmake
+!external/**/CMakeLists.txt
+!external/**/*.cmake
+!CMakeLists.txt
+
+# Visual Studio
+.vs/
+*.user
+*.userosscache
+*.sln.docstates
+*.vcxproj
+*.vcxproj.filters
+*.sln
+x64/
+x86/
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+bld/
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Ll]ogs/
+
+# Visual Studio Code
+.vscode/
+*.code-workspace
+.history/
+
+# PyCharm
+.idea/
+*.iml
+*.iws
+
+# Eclipse
+.project
+.pydevproject
+.cproject
+.classpath
+.settings/
+
+# NetBeans
+nbproject/
+build/
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# Vim
+[._]*.s[a-v][a-z]
+[._]*.sw[a-p]
+[._]s[a-rt-v][a-z]
+[._]ss[a-gi-z]
+[._]sw[a-p]
+*~
+tags
+.netrwhist
+
+# Emacs
+*~
+\#*\#
+/.emacs.desktop
+/.emacs.desktop.lock
+*.elc
+auto-save-list
+tramp
+.\#*
+
+# Operating System Files
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+._*
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+*.stackdump
+[Dd]esktop.ini
+$RECYCLE.BIN/
+*.cab
+*.msi
+*.msix
+*.msm
+*.msp
+*.lnk
+
+# Linux
+*~
+.fuse_hidden*
+.directory
+.Trash-*
+.nfs*
+
+# Backup files
+*.bak
+*.backup
+*.swp
+*.swo
+*.tmp
+*~
+
+# Test files
+deleteme*.klb
+test_output*.klb
+*.test
+tmp_*
+temp_*
+
+# Local configuration
+.env.local
+.env.*.local
+local_settings.py
+settings_local.py
+
+# Documentation builds
+_build/
+_static/
+_templates/
+
+# Profiling
+*.prof
+*.lprof
+
+# Large data files (add specific patterns as needed)
+*.h5
+*.hdf5
+*.tif
+*.tiff
+# Keep small test data
+!test/data/**
+!testData/**
+
+# Packaging
+*.tar.gz
+*.zip
+*.7z
+*.rar
+
+# Temporary build files
+*.pyc~
+*.pyo~
+
+# scikit-build
+_skbuild/
+
+# wheel build temp files
+*.whl.tmp
+
+# pip wheel metadata
+*.dist-info/
+
+# Local scripts (if you have personal dev scripts)
+local_*.py
+scratch.py
+debug_*.py
+
+# Database files
+*.sqlite
+*.db
+
+# Secrets
+*.key
+*.pem
+*.p12
+secrets.yml
+credentials.json
+
+# Logs
+*.log
+logs/
+*.log.*
+
+# Coverage
+.coverage
+htmlcov/
+.tox/
+
+# Benchmarks
+benchmarks/results/
+*.bench
+
+# Cache directories
+.cache/
+*.cache
+
+# pip cache
+.pip_download_cache/
+
+# macOS meta
+.Spotlight-V100
+.Trashes
+
+# Git metadata in external dependencies
+# We track the external/klb source but not its git history
+external/**/.git/
+external/**/.gitignore
+external/**/.gitattributes
+external/**/.gitmodules
+
+# Keep external source code but ignore all git/build artifacts
+external/**/build/
+external/**/dist/
+external/**/__pycache__/
+external/**/*.pyc
+external/**/*.so
+external/**/*.dll
+external/**/*.dylib
+external/**/CMakeFiles/
+external/**/CMakeCache.txt
+
+# Other version control
+.hg/
+.svn/
+.bzr/
+.claude/settings.local.json
+CLAUDE.md
