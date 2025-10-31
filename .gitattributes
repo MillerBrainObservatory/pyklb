@@ -1,0 +1,68 @@
+# Git attributes for pyklb
+
+# Normalize line endings
+* text=auto
+
+# Python files
+*.py text eol=lf
+*.pyx text eol=lf
+*.pxd text eol=lf
+
+# C/C++ files
+*.c text eol=lf
+*.cpp text eol=lf
+*.h text eol=lf
+*.hpp text eol=lf
+
+# CMake
+*.cmake text eol=lf
+CMakeLists.txt text eol=lf
+
+# Shell scripts
+*.sh text eol=lf
+
+# Windows batch files
+*.bat text eol=crlf
+*.cmd text eol=crlf
+
+# Markdown
+*.md text eol=lf
+
+# YAML/TOML
+*.yml text eol=lf
+*.yaml text eol=lf
+*.toml text eol=lf
+
+# JSON
+*.json text eol=lf
+
+# Binary files
+*.klb binary
+*.so binary
+*.dll binary
+*.dylib binary
+*.pyd binary
+*.exe binary
+*.lib binary
+*.a binary
+*.o binary
+*.obj binary
+*.whl binary
+*.tar.gz binary
+*.zip binary
+
+# Images
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+
+# Don't diff generated files
+*.c linguist-generated=true
+*.cpp linguist-generated=true
+src/pyklb.c linguist-generated=true
+src/pyklb.cpp linguist-generated=true
+
+# Mark Cython as main language
+*.pyx linguist-language=Cython
