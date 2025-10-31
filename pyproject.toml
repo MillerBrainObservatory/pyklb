@@ -1,0 +1,89 @@
+[build-system]
+requires = [
+    "scikit-build-core>=0.10.0",
+    "cython>=3.0.0",
+    "numpy>=1.20.0",
+]
+build-backend = "scikit_build_core.build"
+
+[project]
+name = "pyklb"
+version = "0.3.0"
+description = "Python wrapper for the Keller Lab Block (KLB) file format - high-performance storage for 5D microscopy images"
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "BSD-3-Clause" }
+authors = [
+    { name = "Burkhard Hoeckendorf" },
+]
+maintainers = [
+    { name = "Burkhard Hoeckendorf" },
+]
+keywords = ["microscopy", "image", "klb", "file-format", "compression"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: BSD License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Cython",
+    "Programming Language :: C++",
+    "Topic :: Scientific/Engineering",
+    "Topic :: Scientific/Engineering :: Bio-Informatics",
+]
+dependencies = [
+    "numpy>=1.20.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0",
+    "build>=1.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/bhoeckendorf/pyklb"
+Repository = "https://github.com/bhoeckendorf/pyklb"
+Documentation = "https://github.com/bhoeckendorf/pyklb#readme"
+Issues = "https://github.com/bhoeckendorf/pyklb/issues"
+
+[tool.scikit-build]
+minimum-version = "build-system.requires"
+build-dir = "build/{wheel_tag}"
+cmake.build-type = "Release"
+wheel.packages = ["pyklb"]
+sdist.include = ["external/klb"]
+sdist.exclude = [".git*", "build", "dist", "*.egg-info"]
+logging.level = "INFO"
+
+[tool.scikit-build.cmake.define]
+CMAKE_POSITION_INDEPENDENT_CODE = "ON"
+
+[tool.cibuildwheel]
+# Build for Windows and Linux
+build = ["cp39-*", "cp310-*", "cp311-*", "cp312-*", "cp313-*"]
+skip = ["*-win32", "*-manylinux_i686", "*-musllinux*", "pp*"]
+
+[tool.cibuildwheel.windows]
+# Use delvewheel to bundle DLLs
+before-build = "pip install delvewheel"
+repair-wheel-command = "delvewheel repair -w {dest_dir} {wheel}"
+
+[tool.cibuildwheel.linux]
+# Use manylinux2014 for better compatibility
+manylinux-x86_64-image = "manylinux2014"
+
+[dependency-groups]
+dev = [
+    "pytest>=7.0",
+    "cython>=3.0.0",
+    "numpy>=1.20.0",
+    "scikit-build-core>=0.10.0",
+    "build>=1.0",
+    "cmake>=3.15",
+    "jupyter>=1.0",
+    "matplotlib>=3.5",
+]

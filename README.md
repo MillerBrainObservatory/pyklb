@@ -4,15 +4,76 @@ Python wrapper of the [KLB file format](https://bitbucket.org/fernandoamat/kelle
 
 ## Installation
 
-`pip install git+https://github.com/bhoeckendorf/pyklb.git@skbuild`
+### From PyPI (recommended)
 
-## Build
+```bash
+pip install pyklb
+```
 
-Dependencies
+### From source
 
-- [NumPy](http://www.numpy.org/)
-- [Cython](http://cython.org/)
-- C compiler, see [this link](https://github.com/cython/cython/wiki/CythonExtensionsOnWindows) if compiling for Windows with MSVC
-- [KLB main library](https://bitbucket.org/fernandoamat/keller-lab-block-filetype),  precompiled binaries (64-bit only) are available for Linux (>= Ubuntu LTS), Windows, and Mac, and will be automatically downloaded, if appropriate. Other platforms require building the main library separately from source. KLB's main library is self-contained and uses CMake. Afterwards, place the binary in <code>./build/lib/</code> (relative to the top level folder of this repository). On Windows, additionally place the <code>klb.lib</code> in the same folder.
+```bash
+pip install git+https://github.com/bhoeckendorf/pyklb.git
+```
 
-The recommended build and installation method is via [Wheels](http://pythonwheels.com/). If it isn't already installed, you have to add the <code>wheel</code> package by running <code>pip install wheel</code>. You can then build pyklb by executing <code>python setup.py bdist_wheel</code> from the top level folder of this repository. This should create a <code>dist</code> subfolder that contains the resulting [wheel](http://pythonwheels.com/). To install, run <code>pip install /path/to/wheel.whl</code>. Conversely, you can uninstall pyklb using <code>pip uninstall pyklb</code>.
+## Development
+
+This project has been modernized to use modern Python packaging tools:
+
+- **Build system**: [scikit-build-core](https://scikit-build-core.readthedocs.io/) with CMake
+- **Package manager**: [uv](https://docs.astral.sh/uv/) (recommended) or pip
+- **Python support**: Python 3.9+ (tested with 3.12.9)
+
+### Requirements
+
+- Python 3.9 or later
+- C++ compiler (MSVC on Windows, GCC/Clang on Linux/Mac)
+- CMake 3.15 or later (installed automatically by uv/pip)
+
+The KLB C++ library and its dependencies (bzip2, zlib) are built automatically from source.
+
+### Building from source
+
+Using uv (recommended):
+
+```bash
+# Install uv if you haven't already
+pip install uv
+
+# Clone the repository
+git clone https://github.com/bhoeckendorf/pyklb.git
+cd pyklb
+
+# Sync dependencies and build
+uv sync
+
+# Run tests
+uv run pytest
+```
+
+Using pip:
+
+```bash
+# Clone the repository
+git clone https://github.com/bhoeckendorf/pyklb.git
+cd pyklb
+
+# Install in development mode
+pip install -e .
+
+# Run tests
+pytest
+```
+
+### Building wheels for distribution
+
+```bash
+# Using uv
+uv build
+
+# Using build
+pip install build
+python -m build
+```
+
+This creates both a source distribution (.tar.gz) and a wheel (.whl) in the `dist/` directory.
