@@ -18,11 +18,11 @@ pip install git+https://github.com/bhoeckendorf/pyklb.git
 
 ## Development
 
-This project has been modernized to use modern Python packaging tools:
+This project has been updated to use modern Python packaging tools:
 
 - **Build system**: [scikit-build-core](https://scikit-build-core.readthedocs.io/) with CMake
 - **Package manager**: [uv](https://docs.astral.sh/uv/) (recommended) or pip
-- **Python support**: Python 3.9+ (tested with 3.12.9)
+- **Python support**: tested with 3.12.9
 
 ### Requirements
 
@@ -51,29 +51,3 @@ uv sync
 uv run pytest
 ```
 
-Using pip:
-
-```bash
-# Clone the repository
-git clone https://github.com/bhoeckendorf/pyklb.git
-cd pyklb
-
-# Install in development mode
-pip install -e .
-
-# Run tests
-pytest
-```
-
-### Building wheels for distribution
-
-```bash
-# Using uv
-uv build
-
-# Using build
-pip install build
-python -m build
-```
-
-This creates both a source distribution (.tar.gz) and a wheel (.whl) in the `dist/` directory.
