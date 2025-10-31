@@ -1,5 +1,6 @@
 #!python
 #cython: initializedcheck=False, boundscheck=False, overflowcheck=False
+#cython: language_level=3
 
 import cython
 cimport cython
@@ -9,6 +10,9 @@ import numpy as _np
 cimport numpy as _np
 _np.import_array()
 import multiprocessing as _mpc
+
+# Python 3 compatibility: basestring doesn't exist in Python 3
+cdef type basestring = str
 
 
 
@@ -51,7 +55,7 @@ cdef extern from "klb_Cwrapper.h":
 
 
 def readheader(
-    basestring filepath
+    str filepath
     ):
     """
     Read header of KLB file
@@ -77,7 +81,7 @@ def readheader(
     cdef KLB_DATA_TYPE ktype = UINT8_TYPE
     cdef KLB_COMPRESSION_TYPE kcompression = NONE
     cdef _np.ndarray[_np.int8_t, ndim=1] metadata = _np.empty((256,), _np.int8)
-    cdef int errid = readKLBheader(_cstr(filepath), &imagesize[0], &ktype, &pixelspacing[0], &blocksize[0], &kcompression, metadata.data)
+    cdef int errid = readKLBheader(_cstr(filepath), <uint32_t*>&imagesize[0], &ktype, <float32_t*>&pixelspacing[0], <uint32_t*>&blocksize[0], &kcompression, <char*>metadata.data)
     if errid != 0:
         raise IOError("Could not read KLB header of file '%s'. Error code %d" % (filepath, errid))
 
@@ -93,7 +97,7 @@ def readheader(
 
 
 def readfull(
-    basestring filepath,
+    str filepath,
     const int numthreads = _mpc.cpu_count()
     ):
     """
@@ -137,7 +141,7 @@ def readfull(
 
 
 def readroi(
-    basestring filepath,
+    str filepath,
     tczyx_min,
     tczyx_max,
     const int numthreads = _mpc.cpu_count()
@@ -187,7 +191,7 @@ def readroi(
 
 def readfull_inplace(
     _np.ndarray A,
-    basestring filepath,
+    str filepath,
     const int numthreads = _mpc.cpu_count(),
     bool nochecks = False
     ):
@@ -222,7 +226,7 @@ def readfull_inplace(
             raise TypeError("Pre-allocated array must be C_CONTIGUOUS.")
 
     cdef KLB_DATA_TYPE ktype = INT8_TYPE # placeholder, overwritten by function call below
-    cdef int errid = readKLBstackInPlace(_cstr(filepath), A.data, &ktype, numthreads)
+    cdef int errid = readKLBstackInPlace(_cstr(filepath), <void*>A.data, &ktype, numthreads)
     if errid != 0:
         raise IOError("Could not read KLB file '%s'. Error code %d" % (filepath, errid))
 
@@ -230,7 +234,7 @@ def readfull_inplace(
 
 def readroi_inplace(
     _np.ndarray A,
-    basestring filepath,
+    str filepath,
     tczyx_min,
     tczyx_max,
     const int numthreads = _mpc.cpu_count(),
@@ -282,7 +286,7 @@ def readroi_inplace(
             if lb[d] < 0 or ub[d] >= fullsize[-1-d] or lb[d] > ub[d]:
                 raise IndexError("ROI index out of bounds: KLB size: %s, requested ROI: %s-%s; file at %s" % (fullsize, _np.flipud(lb), _np.flipud(ub), filepath))
 
-    cdef int errid = readKLBroiInPlace(_cstr(filepath), A.data, &lb[0], &ub[0], numthreads)
+    cdef int errid = readKLBroiInPlace(_cstr(filepath), <void*>A.data, <uint32_t*>&lb[0], <uint32_t*>&ub[0], numthreads)
     if errid != 0:
         raise IOError("Could not read KLB file '%s'. Error code %d" % (filepath, errid))
 
@@ -295,7 +299,7 @@ def readroi_inplace(
 
 def writefull(
     _np.ndarray A,
-    basestring filepath,
+    str filepath,
     const int numthreads = _mpc.cpu_count(),
     pixelspacing_tczyx = None,
     str metadata = None,
@@ -338,7 +342,8 @@ def writefull(
 
     cdef KLB_DATA_TYPE ktype = _klbtype(A.dtype)
     cdef KLB_COMPRESSION_TYPE kcompression = _klbcompression(compression)
-    cdef int errid = writeKLBstack(A.data, _cstr(filepath), &imagesize[0], ktype, numthreads, &sampling[0], &blocksize_xyzct[0], kcompression, NULL)
+    cdef uint32_t* blocksize_ptr = <uint32_t*>&blocksize_xyzct[0] if blocksize_xyzct is not None else NULL
+    cdef int errid = writeKLBstack(<void*>A.data, _cstr(filepath), <uint32_t*>&imagesize[0], ktype, numthreads, <float32_t*>&sampling[0], blocksize_ptr, kcompression, NULL)
     if errid != 0:
         raise IOError("Could not write KLB file '%s'. Error code %d" % (filepath, errid))
 
@@ -349,11 +354,9 @@ def writefull(
 ###########################################################
 
 
-cdef inline const char* _cstr(basestring pstr):
-    if isinstance(pstr, unicode):
-        return (<unicode>pstr).encode('utf8')
-    else:
-        return pstr
+cdef inline const char* _cstr(str pstr):
+    # In Python 3, all strings are unicode, so just encode to UTF-8
+    return pstr.encode('utf8')
 
 
 cdef inline _np.dtype _pytype(const KLB_DATA_TYPE ktype):

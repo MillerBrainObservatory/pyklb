@@ -406,3 +406,5 @@ external/**/CMakeCache.txt
 .hg/
 .svn/
 .bzr/
+.claude/settings.local.json
+CLAUDE.md
